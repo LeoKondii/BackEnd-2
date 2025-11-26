@@ -6,8 +6,6 @@ const ControllerQuarto = require('../Controllers/ControllerQuarto');
 const ControllerReserva = require('../Controllers/ControllerReserva');
 const middlewares = require('../Middleware/Middleware');
 
-
-const multer = require('multer');
 const route = express.Router();
 
 // Rodar 1x 
@@ -17,22 +15,6 @@ const route = express.Router();
 */
 //db.Cliente.create({nome:'bob', senha:'1234', email:'test@gmail.com'});
 
-/* Upload de imagem
-module.exports = route;
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null,  "public/uploads/");
-    },
-    filename: (req, file, cb) => {
-        req.imageName = req.body.nome + '.png'
-        cb(null, req.imageName)
-    },
-})
-const upload = multer({ storage: storage });
-*/
-
-
 //Home
 route.get("/home", function (req, res) { 
     console.log('Home route - Session:', req.session);
@@ -40,9 +22,7 @@ route.get("/home", function (req, res) {
         res.render('home', {
             layout: 'main',
             email: req.session.email,
-            nome: req.session.nome,
-            admin: res.locals.admin,
-            aluno: res.locals.aluno
+            nome: req.session.nome
         });
     } else {
         res.redirect('/');
@@ -59,6 +39,7 @@ route.get("/listarUsuario", ControllerCliente.getList);
 route.get("/atualizarUsuario/:id", ControllerCliente.getUpdate);
 route.post("/atualizarUsuario", ControllerCliente.postUpdate);
 route.get("/deletarUsuario/:id", ControllerCliente.getDelete);
+
 //Quarto
 route.get("/criarQuarto", ControllerQuarto.getCreate);
 route.post("/criarQuarto", ControllerQuarto.postCreate);
@@ -75,10 +56,4 @@ route.get("/atualizarReserva/:id", middlewares.checkUserProjectAccess, Controlle
 route.post("/atualizarReserva", middlewares.checkUserProjectAccess, ControllerReserva.postUpdate);
 route.get("/deletarReserva/:id", middlewares.checkUserProjectAccess, ControllerReserva.getDelete);
 
-// Export router
 module.exports = route;
-
-//Controller Comentario
-/*route.get("/comentarioCreate", ControllerComentario.getCreate);
-route.post("/comentarioCreate", ControllerComentario.postCreate);
-route.get("/comentarioList", ControllerComentario.getList);*/
