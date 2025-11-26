@@ -11,7 +11,6 @@ module.exports = {
         res.render('cliente/login', { layout: '' });
     },
     async getLogout(req, res) {
-        //res.cookie("userData", req.cookies.userData, { maxAge: 0, httpOnly: true });
         req.session.destroy();
         res.redirect('');
     },
@@ -153,7 +152,6 @@ module.exports = {
 
     //Delete
     async getDelete(req, res) {
-        //log mongo se tiver await o delet tem prioridade
         db.Cliente.findOne({ where: { id: req.params.id } })
         await db.Cliente.destroy({ where: { id: req.params.id } }).then(
             () => res.redirect('/listarCliente')
