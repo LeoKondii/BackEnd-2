@@ -1,5 +1,4 @@
 const db = require('../Config/Postgres');
-const path = require('path');;
 
 module.exports = {
     // Create

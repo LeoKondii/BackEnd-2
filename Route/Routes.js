@@ -1,10 +1,9 @@
 const express = require('express');
-const db = require('../Config/Postgres');
-
 const ControllerCliente = require('../Controllers/ControllerCliente');
 const ControllerQuarto = require('../Controllers/ControllerQuarto');
 const ControllerReserva = require('../Controllers/ControllerReserva');
-const middlewares = require('../Middleware/Middleware');
+const AuthController = require('../Controllers/AuthController');
+const authenticateToken = require('../Middleware/authenticateToken');
 
 const route = express.Router();
 
@@ -29,31 +28,32 @@ route.get("/home", function (req, res) {
     }
 });
 
+//Login
+route.post("/login", AuthController.login);
+route.get("/logout", AuthController.logout);
+
 //Cliente
-route.get('/', ControllerCliente.getLogin);
-route.post("/login", ControllerCliente.login);
-route.get("/logout", ControllerCliente.logout);
-route.get("/criarUsuario", ControllerCliente.getCreate);
-route.post("/criarUsuario", ControllerCliente.postCreate);
-route.get("/listarUsuario", ControllerCliente.getList);
-route.get("/atualizarUsuario/:id", ControllerCliente.getUpdate);
-route.post("/atualizarUsuario", ControllerCliente.postUpdate);
-route.get("/deletarUsuario/:id", ControllerCliente.getDelete);
+route.get("/criarUsuario", authenticateToken, ControllerCliente.getCreate);
+route.post("/criarUsuario", authenticateToken, ControllerCliente.postCreate);
+route.get("/listarUsuario", authenticateToken, ControllerCliente.getList);
+route.get("/atualizarUsuario/:id", authenticateToken, ControllerCliente.getUpdate);
+route.post("/atualizarUsuario", authenticateToken, ControllerCliente.postUpdate);
+route.get("/deletarUsuario/:id", authenticateToken, ControllerCliente.getDelete);
 
 //Quarto
-route.get("/criarQuarto", ControllerQuarto.getCreate);
-route.post("/criarQuarto", ControllerQuarto.postCreate);
-route.get("/listarQuarto", ControllerQuarto.getList);
-route.get("/atualizarQuarto/:id", ControllerQuarto.getUpdate);
-route.post("/atualizarQuarto", ControllerQuarto.postUpdate);
-route.get("/deletarQuarto/:id", ControllerQuarto.getDelete);
+route.get("/criarQuarto", authenticateToken, ControllerQuarto.getCreate);
+route.post("/criarQuarto", authenticateToken, ControllerQuarto.postCreate);
+route.get("/listarQuarto", authenticateToken, ControllerQuarto.getList);
+route.get("/atualizarQuarto/:id", authenticateToken, ControllerQuarto.getUpdate);
+route.post("/atualizarQuarto", authenticateToken, ControllerQuarto.postUpdate);
+route.get("/deletarQuarto/:id", authenticateToken, ControllerQuarto.getDelete);
 
 //Reserva
-route.get("/criarReserva", ControllerReserva.getCreate);
-route.post("/criarReserva", ControllerReserva.postCreate);
-route.get("/listarReserva", ControllerReserva.getList);
-route.get("/atualizarReserva/:id", middlewares.checkUserProjectAccess, ControllerReserva.getUpdate);
-route.post("/atualizarReserva", middlewares.checkUserProjectAccess, ControllerReserva.postUpdate);
-route.get("/deletarReserva/:id", middlewares.checkUserProjectAccess, ControllerReserva.getDelete);
+route.get("/criarReserva", authenticateToken, ControllerReserva.getCreate);
+route.post("/criarReserva", authenticateToken, ControllerReserva.postCreate);
+route.get("/listarReserva", authenticateToken, ControllerReserva.getList);
+route.get("/atualizarReserva/:id", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.getUpdate);
+route.post("/atualizarReserva", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.postUpdate);
+route.get("/deletarReserva/:id", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.getDelete);
 
 module.exports = route;
