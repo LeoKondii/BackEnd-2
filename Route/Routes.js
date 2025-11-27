@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../Config/Db');
+const db = require('../Config/Postgres');
 
 const ControllerCliente = require('../Controllers/ControllerCliente');
 const ControllerQuarto = require('../Controllers/ControllerQuarto');
