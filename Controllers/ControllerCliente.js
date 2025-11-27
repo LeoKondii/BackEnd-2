@@ -1,4 +1,4 @@
-const db = require('../Config/Db');
+const db = require('../Config/Postgres');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10; 
