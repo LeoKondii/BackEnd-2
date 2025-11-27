@@ -4,7 +4,7 @@ const db = require('../Config/Db');
 const ControllerCliente = require('../Controllers/ControllerCliente');
 const ControllerQuarto = require('../Controllers/ControllerQuarto');
 const ControllerReserva = require('../Controllers/ControllerReserva');
-const middlewares = require('../Middleware/Middlewares');
+const middlewares = require('../Middleware/Middleware');
 
 const route = express.Router();
 

@@ -6,15 +6,15 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         primaryKey: true
     },
-    nome: {
+    nomeCliente: {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    senha: {
+    senhaCliente: {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    email: {
+    emailCliente: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false

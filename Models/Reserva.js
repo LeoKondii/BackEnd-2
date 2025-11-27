@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    preçoReserva: {
+    precoReserva: {
         type: Sequelize.FLOAT,
         allowNull: false
     },
