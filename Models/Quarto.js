@@ -14,6 +14,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         allowNull: false
     },
+    precoQuarto: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+    },
     vaga: {
         type: Sequelize.BOOLEAN,
         defaultValue: true
