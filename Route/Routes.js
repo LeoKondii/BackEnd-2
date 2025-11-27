@@ -31,8 +31,8 @@ route.get("/home", function (req, res) {
 
 //Cliente
 route.get('/', ControllerCliente.getLogin);
-route.post("/login", ControllerCliente.postLogin);
-route.get("/logout", ControllerCliente.getLogout);
+route.post("/login", ControllerCliente.login);
+route.get("/logout", ControllerCliente.logout);
 route.get("/criarUsuario", ControllerCliente.getCreate);
 route.post("/criarUsuario", ControllerCliente.postCreate);
 route.get("/listarUsuario", ControllerCliente.getList);

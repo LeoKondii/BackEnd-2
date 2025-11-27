@@ -1,9 +1,9 @@
 const routes = require('./Router/Route');
 const express = require('express');
+const app = express();
 const middlewares = require('./Middleware/Middleware');
 //var cookieParser = require('cookie-parser');
 var session = require('express-session');
-const app = express();
 
 // Setup do Express 
 const path = require('path');

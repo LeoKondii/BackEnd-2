@@ -1,8 +1,8 @@
 const db = require('../Config/Postgres');
 const path = require('path');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10; 
-const logUsuario = require('../Models/NoSql/LogUsuario');
+const secretKey = 'your_secret_key';
 
 module.exports = {
 
@@ -10,56 +10,29 @@ module.exports = {
     async getLogin(req, res) {
         res.render('cliente/login', { layout: '' });
     },
-    async getLogout(req, res) {
+    async logout(req, res) {
         req.session.destroy();
         res.redirect('');
     },
 
-    async postLogin(req, res) {
+    async login(req, res) {
         try {
-            console.log('Tentativa de Login:', req.body);
-
-            if (!req.body.email || !req.body.senha) {
-                return res.render('usuario/login', {
-                    error: 'Por favor, preencha todos os campos',
-                    layout: 'NoMenu'
-                });
-            }
-
-            const user = await db.Cliente.findOne({ where: { email: req.body.email } });
-            console.log('Achou Usuario:', user ? 'Yes' : 'No');
+            const { login, senha } = req.body;
+            const user = await db.Usuario.findOne({ where: { login:req.body.login } });
 
             if (!user) {
-                return res.render('cliente/login', {
-                    error: 'Usuário não encontrado',
-                    layout: 'NoMenu'
-                });
+                return res.status(404).json({ error: 'Usuário não encontrado' });
             }
 
-            const passwordMatch = await bcrypt.compare(req.body.senha, user.senha);
-            console.log('Password match:', passwordMatch ? 'Yes' : 'No');
-
-            if (!passwordMatch) {
-                return res.render('usuario/login', {
-                    error: 'Senha incorreta',
-                    layout: 'NoMenu'
-                });
+            if (senha != user.senha) {
+                return res.status(401).json({ error: 'Senha incorreta' });
             }
 
-            req.session.email = user.email;
-            req.session.userId = user.id;
-            req.session.nome = user.nome;
-            res.locals.email = user.email;
-            res.locals.nome = user.nome;
-
-            console.log('Login successful, session:', req.session);
-            return res.redirect('/home');
+            const token = generateToken(user);
+            res.status(200).json({ token });
         } catch (err) {
-            console.error('Login error:', err);
-            return res.render('cliente/login', {
-                error: 'Erro ao fazer login. Tente novamente.',
-                layout: 'NoMenu'
-            });
+            console.error(err);
+            res.status(500).json({ error: 'Erro ao fazer login' });
         }
     },
 
@@ -97,11 +70,6 @@ module.exports = {
                 senha: hashedPassword
             });
 
-            req.session.email = user.email;
-            req.session.userId = user.id;
-            res.locals.email = user.email;
-            
-
             return res.redirect('/home');
         } catch (err) {
             console.error('Erro ao criar usuário:', err);
@@ -130,13 +98,11 @@ module.exports = {
             const updateData = { ...req.body };
             delete updateData.id; 
             
-            // hash de senha
             if (updateData.senha) {
                 updateData.senha = await bcrypt.hash(updateData.senha, saltRounds);
             } else {
                 delete updateData.senha; 
             }
-
             const [updated] = await db.Cliente.update(updateData, { 
                 where: { id: req.body.id }
             });
@@ -157,4 +123,15 @@ module.exports = {
             () => res.redirect('/listarCliente')
         ).catch(err => { console.log(err); });
     }
+}
+
+
+function generateToken(user) {
+    const payload = {
+        id: user.id,
+        email: user.email
+    };
+
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+    return token;
 }
