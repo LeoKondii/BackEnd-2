@@ -7,7 +7,7 @@ module.exports = {
         async login(req, res) {
             try {
                 const { login, senha } = req.body;
-                const user = await db.Usuario.findOne({ where: { login:req.body.login } });
+                const user = await db.Cliente.findOne({ where: { login:req.body.login } });
     
                 if (!user) {
                     return res.status(404).json({ error: 'Usuário não encontrado' });

@@ -13,7 +13,7 @@ module.exports = {
 
     async postCreate(req, res) {
         try {
-            if (!req.body.nome || !req.body.email || !req.body.senha) {
+            if (!req.body.nomeCliente || !req.body.emailCliente || !req.body.senhaCliente) {
                 return res.render('cliente/criarCliente', {
                     error: 'Por favor, preencha todos os campos',
                     layout: 'NoMenu'
@@ -21,7 +21,7 @@ module.exports = {
             }
 
             const existingUser = await db.Cliente.findOne({ 
-                where: { email: req.body.email } 
+                where: { email: req.body.emailCliente } 
             });
             
             if (existingUser) {
@@ -31,10 +31,10 @@ module.exports = {
                 });
             }
 
-            const hashedPassword = await bcrypt.hash(req.body.senha, saltRounds);
+            const hashedPassword = await bcrypt.hash(req.body.senhaCliente, saltRounds);
             const user = await db.Cliente.create({
-                nome: req.body.nome,
-                email: req.body.email,
+                nome: req.body.nomeCliente,
+                email: req.body.emailCliente,
                 senha: hashedPassword
             });
 
@@ -43,7 +43,7 @@ module.exports = {
             console.error('Erro ao criar usuário:', err);
             return res.render('cliente/criarCliente', {
                 error: 'Erro ao criar usuário. Por favor, tente novamente.',
-                layout: 'NoMenu.handlebars'
+                layout: 'NoMenu.handlebars' //Atualzar
             });
         }
     },
@@ -67,12 +67,12 @@ module.exports = {
             delete updateData.id; 
             
             if (updateData.senha) {
-                updateData.senha = await bcrypt.hash(updateData.senha, saltRounds);
+                updateData.senha = await bcrypt.hash(updateData.senhaCliente, saltRounds);
             } else {
                 delete updateData.senha; 
             }
             const [updated] = await db.Cliente.update(updateData, { 
-                where: { id: req.body.id }
+                where: { id: req.body.idCliente }
             });
 
         } catch (err) {
@@ -85,9 +85,9 @@ module.exports = {
     },
 
     //Delete
-    async getDelete(req, res) {
-        db.Cliente.findOne({ where: { id: req.params.id } })
-        await db.Cliente.destroy({ where: { id: req.params.id } }).then(
+    async getDelete(req, res) { //Verficar 
+        db.Cliente.findOne({ where: { id: req.params.idCliente } })
+        await db.Cliente.destroy({ where: { id: req.params.idCliente } }).then(
             () => res.redirect('/listarCliente')
         ).catch(err => { console.log(err); });
     }

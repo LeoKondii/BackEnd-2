@@ -33,12 +33,12 @@ route.post("/login", AuthController.login);
 route.get("/logout", AuthController.logout);
 
 //Cliente
-route.get("/criarUsuario", authenticateToken, ControllerCliente.getCreate);
-route.post("/criarUsuario", authenticateToken, ControllerCliente.postCreate);
-route.get("/listarUsuario", authenticateToken, ControllerCliente.getList);
-route.get("/atualizarUsuario/:id", authenticateToken, ControllerCliente.getUpdate);
-route.post("/atualizarUsuario", authenticateToken, ControllerCliente.postUpdate);
-route.get("/deletarUsuario/:id", authenticateToken, ControllerCliente.getDelete);
+route.get("/criarCliente", authenticateToken, ControllerCliente.getCreate);
+route.post("/criarCliente", authenticateToken, ControllerCliente.postCreate);
+route.get("/listarCliente", authenticateToken, ControllerCliente.getList);
+route.get("/atualizarCliente/:id", authenticateToken, ControllerCliente.getUpdate);
+route.post("/atualizarCliente", authenticateToken, ControllerCliente.postUpdate);
+route.get("/deletarCliente/:id", authenticateToken, ControllerCliente.getDelete);
 
 //Quarto
 route.get("/criarQuarto", authenticateToken, ControllerQuarto.getCreate);
@@ -52,8 +52,8 @@ route.get("/deletarQuarto/:id", authenticateToken, ControllerQuarto.getDelete);
 route.get("/criarReserva", authenticateToken, ControllerReserva.getCreate);
 route.post("/criarReserva", authenticateToken, ControllerReserva.postCreate);
 route.get("/listarReserva", authenticateToken, ControllerReserva.getList);
-route.get("/atualizarReserva/:id", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.getUpdate);
-route.post("/atualizarReserva", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.postUpdate);
-route.get("/deletarReserva/:id", authenticateToken, middlewares.checkUserProjectAccess, ControllerReserva.getDelete);
+route.get("/atualizarReserva/:id", authenticateToken, ControllerReserva.getUpdate);
+route.post("/atualizarReserva", authenticateToken, ControllerReserva.postUpdate);
+route.get("/deletarReserva/:id", authenticateToken, ControllerReserva.getDelete);
 
 module.exports = route;

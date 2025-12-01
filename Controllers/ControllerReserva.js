@@ -26,7 +26,7 @@ module.exports = {
         ).catch(function (err) { console.log(err); });
     },
     //Delete
-    async getDelete(req, res) {
+    async getDelete(req, res) { //Verficar
         await db.Reserva.destroy({ where: { id: req.params.id } })
     }
 }
