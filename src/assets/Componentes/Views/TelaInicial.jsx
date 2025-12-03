@@ -1,7 +1,10 @@
 import Coleta from '../Coleta.jsx'
 import '../../../index.css'
+import { useNavigate } from 'react-router-dom';
+
 
 function TelaInicial() {
+    const navigate = useNavigate();
     return (
     <>
         <div>
@@ -9,10 +12,9 @@ function TelaInicial() {
         </div>
         <Coleta nome="Nome" dados="text"/>
         <Coleta nome="Senha" dados="password"/>
-        <Coleta nome="Email" dados="email"/>
         <div>
-        <button className="button" onClick={() => alert('Redirecionando...')}>Concluir</button>
-        <button className="button" onClick={() => alert('Redirecionando...')}>Retornar</button>
+        <button className="button" onClick={() => navigate('/login')}>Concluir</button>
+        <button className="button" onClick={() => navigate('/cadastro')}>Cadastrar</button>
         </div>
     </>)
     }

@@ -19,6 +19,10 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
         allowNull: false
     },
+    tipoCliente: {
+        type: Sequelize.ENUM('Admin','Cliente'),
+        defaultValue: 'Cliente'
+    }
   });
   return Cliente;
 }

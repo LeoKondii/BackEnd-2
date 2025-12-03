@@ -1,7 +1,9 @@
 import Coleta from '../Coleta.jsx'
 import '../../../index.css'
+import { useNavigate } from 'react-router-dom';
 
 function TelaCadastro() {
+    const navigate = useNavigate();
     return (
     <>
         <div>
@@ -12,7 +14,7 @@ function TelaCadastro() {
         <Coleta nome="Email" dados="email"/>
         <div>
         <button className="button" onClick={() => alert('Redirecionando...')}>Concluir</button>
-        <button className="button" onClick={() => alert('Redirecionando...')}>Retornar</button>
+        <button className="button" onClick={() => navigate('/')}>Retornar</button>
         </div>
     </>)
     }

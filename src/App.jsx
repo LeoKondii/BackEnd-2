@@ -1,19 +1,21 @@
 import './App.css'
 import './index.css'
-import Coleta from './assets/Componentes/Coleta'
+import TelaInicial from './assets/Componentes/Views/TelaInicial.jsx'
 import TelaCadastro from './assets/Componentes/Views/TelaCadastro.jsx'
+import TelaLogin from './assets/Componentes/Views/TelaLogin.jsx'
+import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 
 function App() {
   return (
     <>
       <div>
-        <h1>Bem vindo ao site ...</h1>
-      </div>
-      <Coleta nome="Usuário" dados="text"/>
-      <Coleta nome="Senha" dados="password"/>
-      <div>
-      <button className="button" onClick={() => alert('Redirecionando...')}>Entrar</button>
-      <button className="button" onClick={<TelaCadastro />}>Criar conta</button>
+      <Router>
+        <Routes>
+          <Route path='/' element={<TelaInicial />} />
+          <Route path='/cadastro' element={<TelaCadastro />} />
+          <Route path='/login' element={<TelaLogin />} />
+        </Routes>
+      </Router>
       </div>
     </>
   )
