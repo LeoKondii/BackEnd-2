@@ -1,18 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import TelaInicial from './assets/Componentes/TelaInicial.jsx'
-import Botao from './assets/Componentes/Botao.jsx'
+import './index.css'
+import Coleta from './assets/Componentes/Coleta'
+import TelaCadastro from './assets/Componentes/Views/TelaCadastro.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <TelaInicial nome="Email" dados="email"/>
-      <TelaInicial nome="Senha" dados="senha"/>
-      <Botao texto="Entrar" onClick={() => alert('Entrando...')}/>
+      <div>
+        <h1>Bem vindo ao site ...</h1>
+      </div>
+      <Coleta nome="Usuário" dados="text"/>
+      <Coleta nome="Senha" dados="password"/>
+      <div>
+      <button className="button" onClick={() => alert('Redirecionando...')}>Entrar</button>
+      <button className="button" onClick={<TelaCadastro />}>Criar conta</button>
+      </div>
     </>
   )
 }

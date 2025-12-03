@@ -1,0 +1,9 @@
+.coletaCaixa{
+    position:relative
+}
+
+.coletaLabel{
+    position:fixed;
+    left: 38em;
+    text-align: center;
+}
