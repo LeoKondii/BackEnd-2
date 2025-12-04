@@ -20,7 +20,7 @@ function TelaLogin() {
             <div class='dropdown'>
                 <button class="dropbtn">Reservas</button>
                 <div class="dropdown-content">
-                    <a href="#">Adicionar</a>
+                    <a href="tabela">Adicionar</a>
                     <a href="#">Listar</a>
                 </div>
             </div>

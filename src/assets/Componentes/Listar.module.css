@@ -1,0 +1,6 @@
+.Linha{
+    display:inline-flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 100px;
+}

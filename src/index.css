@@ -28,18 +28,18 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #c9c9c9;
+  background-color: #f3f3f3;
   cursor: pointer;
   transition: border-color 0.25s;
   margin: 10px;
 }
 button:hover {
-  border-color: #535353;
+  background-color: #c0c0c0;
 }
 
 .dropbtn {
-  background-color: #04AA6D;
-  color: white;
+  background-color: #f3f3f3;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -70,4 +70,4 @@ button:hover {
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: #c0c0c0;}

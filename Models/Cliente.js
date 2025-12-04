@@ -20,8 +20,8 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false
     },
     tipoCliente: {
-        type: Sequelize.ENUM('Admin','Cliente'),
-        defaultValue: 'Cliente'
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
   });
   return Cliente;
