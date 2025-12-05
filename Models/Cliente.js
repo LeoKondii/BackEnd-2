@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Cliente = sequelize.define('cliente', {
+  const Cliente = sequelize.define('clientes', {
     idCliente: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         unique: true,
         allowNull: false
     },
-    tipoCliente: {
+    admin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
     }

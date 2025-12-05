@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Reserva = sequelize.define('reserva', {
+  const Reserva = sequelize.define('reservas', {
     idReserva: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -17,14 +17,14 @@ module.exports = (sequelize, Sequelize) => {
     idCliente: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'cliente',
+            model: 'clientes',
             key: 'idCliente'
         }
     },
     idQuarto: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'quarto',
+            model: 'quartos',
             key: 'idQuarto'
         }
     }

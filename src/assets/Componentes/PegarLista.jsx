@@ -1,10 +1,18 @@
+const clientes = require('../../Models/Cliente');
+
 function PegarLista({id}) {
+    
+    const n = id;
+    const arr =[];
+    for (let i = 0; i < n; i++) {
+        arr.push(
+            <div>
+                <label>Item {i + 1}</label>
+            </div>
+        );
+    }
     return (
-     <div className={styles.Linha}>
-        <label>{d1}</label>
-        <label>{d2}</label>
-        <Admin admin={true}></Admin>
-     </div>
+     arr
     )
 }
 export default PegarLista;
