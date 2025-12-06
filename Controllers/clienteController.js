@@ -1,3 +1,5 @@
 const db = require('../Config/Postgres.js');
 const express = require('express');
-const router = express.Router();
+
+// Create a new cliente
+exports.createCliente = async (req, res) => {}

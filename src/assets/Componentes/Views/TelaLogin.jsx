@@ -6,8 +6,6 @@ function TelaLogin() {
     return (
     <>
         <div>
-            <script>
-            if(user.tipoCliente == 'Admin'){
             <div class='dropdown'>
                 <button class="dropbtn">Clientes</button>
                 <div class="dropdown-content">
@@ -15,8 +13,6 @@ function TelaLogin() {
                     <a href="#">Listar</a>
                 </div>
             </div>
-}
-            </script>
             <div class='dropdown'>
                 <button class="dropbtn">Reservas</button>
                 <div class="dropdown-content">
@@ -31,6 +27,9 @@ function TelaLogin() {
                     <a href="#">Listar</a>
                 </div>
             </div>
+        </div>
+        <div>
+            <button onClick={() => navigate('/')}>Sair</button>
         </div>
     </>)
     }

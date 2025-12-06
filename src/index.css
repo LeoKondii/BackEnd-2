@@ -21,6 +21,12 @@ body {
   min-height: 100vh;
 }
 
+label {
+  display: inline-block;
+  padding-right: 10px;
+  font-weight: 600;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
